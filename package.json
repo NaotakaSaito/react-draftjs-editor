@@ -2,7 +2,7 @@
 	"name": "react-draftjs-editor",
 	"version": "0.1.0",
 	"types": "types/index.d.ts",
-	"main": "build/index",
+	"main": "build/editor.bundle.js",
 	"dependencies": {
 		"@emotion/react": "^11.8.2",
 		"@emotion/styled": "^11.8.1",
@@ -16,7 +16,7 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"build": "tsc",
+		"build": "webpack --config webpack.prod.js",
 		"start": "webpack-dev-server --config example/webpack.config.js --port 3000 --host 127.0.0.1 --progress --profile --static example/"
 	},
 	"devDependencies": {
