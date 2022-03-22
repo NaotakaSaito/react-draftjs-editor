@@ -6,4 +6,5 @@ export interface EditorStateProps {
 }
 export interface EditorStateType {
     editorState: EditorState;
+    editorPaddingTop: string;
 }

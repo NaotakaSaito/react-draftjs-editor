@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Editor, EditorState, RichUtils, getDefaultKeyBinding, CompositeDecorator, convertToRaw, convertFromRaw, convertFromHTML, ContentState } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 
@@ -70,10 +70,19 @@ export const convertToHTML = (contentState: ContentState) => {
 }
 
 export const EditorApp = (props: any) => {
-    const [state, setState] = React.useState<EditorStateType>({
-        editorState: EditorState.createEmpty(compositeDecorator)
+    const [state, setState] = useState<EditorStateType>({
+        editorState: EditorState.createEmpty(compositeDecorator),
+        editorPaddingTop: "100px"
     });
+    const refMenu = useRef(null);
     const { editorState } = state;
+    const containerStyle = {
+        display: "flex",
+        flexDirection: "column",
+        width: "100vw",
+        height: "100vh",
+    };
+
     const onChange = (editorState: any) => {
         state.editorState = editorState;
         setState({ ...state });
@@ -121,14 +130,16 @@ export const EditorApp = (props: any) => {
             state={state}
             onChange={(rawData: any) => {
                 if (rawData === null) {
-                    setState({ editorState: EditorState.createEmpty(compositeDecorator) })
+                    state.editorState = EditorState.createEmpty(compositeDecorator);
+                    setState({ ...state })
                 } else {
-                    setState({ editorState: EditorState.createWithContent(convertFromRaw(rawData), compositeDecorator) })
+                    state.editorState = EditorState.createWithContent(convertFromRaw(rawData), compositeDecorator);
+                    setState({ ...state })
                 }
 
             }}>
             <div className="RichEditor-root">
-                <div style={{ width: '100%' }}>
+                <div className="RichEditor-menu" ref={refMenu}>
                     <Block.StyleControls
                         editorState={editorState}
                         onToggle={onChange}
@@ -184,7 +195,7 @@ export const EditorApp = (props: any) => {
                     </Box>
                 </div>
 
-                <div className={className}>
+                <div className={className} style={{ marginTop: refMenu?.current?.clientHeight ? (refMenu.current.clientHeight) : "20px" }}>
                     <Editor
                         blockStyleFn={getBlockStyle}
                         customStyleMap={styleMap}

@@ -123,7 +123,7 @@ export const EditorMenu = ({ state, onChange, children }: any) => {
     };
     return (
         <React.Fragment>
-            <AppBar position="static">
+            <AppBar position="fixed">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Typography
