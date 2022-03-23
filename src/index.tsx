@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Editor, EditorState, RichUtils, getDefaultKeyBinding, CompositeDecorator, convertToRaw, convertFromRaw, convertFromHTML, ContentState } from 'draft-js';
+import { Editor, EditorState, RichUtils, getDefaultKeyBinding, CompositeDecorator, convertToRaw, convertFromRaw, convertFromHTML, ContentState, RawDraftContentState} from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 
 import { Box } from '@mui/material'
@@ -58,6 +58,9 @@ export const StyleButton = (props: any) => {
     );
 }
 
+export const convertFromRawToHTML = (rawData: RawDraftContentState) => {
+	return convertToHTML(convertFromRaw(rawData))
+}
 export const convertToHTML = (contentState: ContentState) => {
     return stateToHTML(contentState, {
         blockRenderers: {

@@ -149,9 +149,6 @@ export const LinkDialog = (props: LinkEditorProps) => {
                     entityKey
                 )
             )
-            console.log("### EditorState after onToggle ###")
-            console.log({ raw: convertToRaw(editorState.getCurrentContent()) });
-
         }
         setLinkState({
             showUrlInput: false,
