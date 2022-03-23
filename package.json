@@ -18,7 +18,9 @@
 	"scripts": {
 		"build": "webpack --config webpack.prod.js",
 		"dev": "webpack --config webpack.dev.js",
-		"start": "webpack-dev-server --config example/webpack.config.js --port 3000 --host 127.0.0.1 --progress --profile --static example/"
+		"watch": "webpack --watch --config webpack.dev.js",
+		"start": "webpack-dev-server --config example/webpack.config.js --port 3000 --host 127.0.0.1 --progress --profile --static example/",
+		"clean": "rm -r dist types package-lock.json node_modules"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.17.6",
